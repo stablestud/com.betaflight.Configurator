@@ -1,0 +1,75 @@
+app-id:   'com.betaflight.Configurator'
+runtime:  'org.freedesktop.Platform'
+runtime-version: '20.08'
+sdk: 'org.freedesktop.Sdk'
+sdk-extensions:
+    - 'org.freedesktop.Sdk.Extension.node10'
+command: 'betaflight-configurator'
+build-options:
+    append-path: '/app/node/bin:/app/yarnpkg/bin'
+    env:
+      - 'NPM_CONFIG_NODEDIR=/app/node'
+separate-locales: false
+modules:
+    # Install Nodejs
+    - name: 'nodejs'
+      buildsystem: 'simple'
+      build-commands:
+          - '/usr/lib/sdk/node10/install-sdk.sh'
+          - 'node --version'
+      cleanup:
+          - '*'
+    # Install Yarn
+    - name: 'yarn'
+      buildsystem: 'simple'
+      build-commands:
+          - 'cp --archive --target-dir "${FLATPAK_DEST}" yarnpkg'
+          - 'yarn --offline --version'
+      sources:
+          - 'src-yarnpkg.yml'
+      cleanup:
+          - '*'
+    - name: 'app'
+      only-arches:
+        - 'i386'
+      buildsystem: 'simple'
+      build-options:
+          env:
+              - 'ARCH=linux32'
+      build-commands: &app_build
+          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator install'
+          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
+          - 'cp --verbose --archive "${FLATPAK_BUILDER_BUILDDIR}/betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
+          - 'mkdir --parent "${FLATPAK_DEST}/bin"'
+          - 'ln --symbolic "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator" "${FLATPAK_DEST}/bin/betaflight-configurator"'
+      sources: &sources
+          - 'src-btfl.yml'
+          - 'src-nodejspkgs.yml'
+          - 'src-nwjs.yml'
+    - name: 'app'
+      only-arches:
+          - 'x86_64'
+      buildsystem: 'simple'
+      build-options:
+          env:
+              - 'ARCH=linux64'
+      build-commands: *app_build
+      sources: *sources
+    - name: 'app'
+      only-arches:
+          - 'arm'
+      buildsystem: 'simple'
+      build-options:
+          env:
+              - 'ARCH=armv7'
+      build-commands: *app_build
+      sources: *sources
+finish-args:
+    - '--share=ipc'
+    - '--socket=x11'
+    - '--socket=pulseaudio'
+    - '--share=network'
+    - '--filesystem=home'
+    - '--device=all'
+    - '--socket=system-bus'
+    - '--allow=bluetooth'
