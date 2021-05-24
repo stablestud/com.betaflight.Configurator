@@ -1,6 +1,6 @@
 .PHONY: all build install run sources clean cleanall
 
-SOURCES=src-appdata.json src-btfl.json src-nwjs.json src-yarn.json src-nodejspkgs.json
+SOURCES=src-appdata.json src-btfl.json src-nwjs.json src-yarnpkg.json src-nodejspkgs.json
 APPDATA=com.betaflight.Configurator.appdata.xml
 
 all: install
