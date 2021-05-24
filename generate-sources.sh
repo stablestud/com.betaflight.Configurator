@@ -260,7 +260,7 @@ main() {
 	echo "[$(( ++count ))] Check for submodules"
 	check_submodule
 	echo "[$(( ++count ))] Clone ${btfl_gitfile} repository to tmp directory"
-	trap cleanup EXIT SIGTERM SIGINT
+	trap cleanup EXIT TERM INT
 	clone_repo
 	echo "[$(( ++count ))] Remove current sources"
 	remove_sources
