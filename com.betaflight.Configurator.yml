@@ -77,9 +77,7 @@ modules:
           - 'appstream-util validate-relax --nonet "${FLATPAK_ID}.appdata.xml"'
           - 'install "${FLATPAK_ID}.appdata.xml" "${FLATPAK_DEST}/share/metainfo"'
       sources:
-          - type: 'file'
-            path: 'com.betaflight.Configurator.appdata.xml'
-            sha256: 'dc312ee76498907c3d3ebf0c69105cd1846c814a2a62df28420d38494f1d97fd'
+          - 'src-appdata.yml'
 finish-args:
     - '--share=ipc'
     - '--socket=x11'
