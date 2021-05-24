@@ -14,9 +14,9 @@ When updating the flatpak to a new Betaflight Configurator release the following
 The following files are auto generated and should not be changed by hand.    
 Instead run `generate-sources.sh` to generate the latest sources based on the selected Betaflight Configurator Version in `generate-sources.sh`
 
-- `src-appdata.yml`
-- `src-btfl.yml`
-- `src-nwjs.yml`
-- `src-yarn.yml`
+- `src-appdata.json`
+- `src-btfl.json`
+- `src-nwjs.json`
+- `src-yarn.json`
 - `src-nodejspkgs.json`
 - `com.betaflight.Configurator.appdata.xml`

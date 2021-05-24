@@ -26,7 +26,7 @@ modules:
           - 'cp --archive --target-dir "${FLATPAK_DEST}" yarnpkg'
           - 'yarn --offline --version'
       sources:
-          - 'src-yarnpkg.yml'
+          - 'src-yarnpkg.json'
       cleanup:
           - '*'
     - name: 'app'
@@ -41,9 +41,9 @@ modules:
           - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
           - 'cp --verbose --archive "${FLATPAK_BUILDER_BUILDDIR}/betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
       sources: &sources
-          - 'src-btfl.yml'
+          - 'src-btfl.json'
           - 'src-nodejspkgs.json'
-          - 'src-nwjs.yml'
+          - 'src-nwjs.json'
     - name: 'app'
       only-arches:
           - 'x86_64'
@@ -77,7 +77,7 @@ modules:
           - 'appstream-util validate-relax --nonet "${FLATPAK_ID}.appdata.xml"'
           - 'install "${FLATPAK_ID}.appdata.xml" "${FLATPAK_DEST}/share/metainfo"'
       sources:
-          - 'src-appdata.yml'
+          - 'src-appdata.json'
 finish-args:
     - '--share=ipc'
     - '--socket=x11'

@@ -14,11 +14,11 @@ builder_tools="${node_generator}"
 
 xml_appdata_file="com.betaflight.Configurator.appdata.xml"
 
-src_btfl="src-btfl.yml"
-src_yarnpkg="src-yarnpkg.yml"
+src_btfl="src-btfl.json"
+src_yarnpkg="src-yarnpkg.json"
 src_nodejspkgs="src-nodejspkgs.json"
-src_nwjs="src-nwjs.yml"
-src_appdata="src-appdata.yml"
+src_nwjs="src-nwjs.json"
+src_appdata="src-appdata.json"
 
 generated_files="${src_btfl} ${src_yarnpkg} ${src_nodejspkgs} ${src_appdata} ${xml_appdata_file}"
 
@@ -74,11 +74,15 @@ remove_sources() {
 
 gen_btfl_src() {
 	tee "${src_btfl}" <<EOF
-- type: 'git'
-  url: '${btfl_repo}'
-  tag: '${btfl_version}'
-  commit: '${btfl_commit}'
-  dest: '${btfl_dirname}'
+[ 
+	{
+		"type": "git",
+		"url": "${btfl_repo}",
+		"tag": "${btfl_version}",
+		"commit": "${btfl_commit}",
+		"dest": "${btfl_dirname}"
+	}
+]
 EOF
 }
 
@@ -89,10 +93,14 @@ gen_yarnpkg_src() {
 	wget --directory-prefix "${tmp_path}" "${yarnpkg_url}"
 	yarnpkg_sha256sum="$(sha256sumof "${tmp_path}/${yarnpkg_file}")"
 	tee "${src_yarnpkg}" <<EOF
-- type: 'archive'
-  url: '${yarnpkg_url}'
-  sha256: '${yarnpkg_sha256sum}'
-  dest: 'yarnpkg'
+[ 
+	{
+		"type": "archive",
+		"url": "${yarnpkg_url}",
+		"sha256": "${yarnpkg_sha256sum}",
+		"dest": "yarnpkg"
+	}
+]
 EOF
 }
 
@@ -180,24 +188,29 @@ gen_nwjs_src() {
 	nwjs_armv7_sha256sum="$(sha256sumof "${tmp_path}/${nwjs_armv7_file}")"
 
 	tee "${src_nwjs}" <<EOF
-- type: 'archive'
-  only-arches:
-      - 'i386'
-  url: '${nwjs_i386_url}'
-  sha256: '${nwjs_i386_sha256sum}'
-  dest: 'betaflight-configurator/cache/${nwjs_i386_version}-normal/linux32'
-- type: 'archive'
-  only-arches:
-      - 'x86_64'
-  url: '${nwjs_amd64_url}'
-  sha256: '${nwjs_amd64_sha256sum}'
-  dest: 'betaflight-configurator/cache/${nwjs_amd64_version}-normal/linux64'
-- type: 'archive'
-  only-arches:
-      - 'arm'
-  url: '${nwjs_armv7_url}'
-  sha256: '${nwjs_armv7_sha256sum}'
-  dest: 'betaflight-configurator/cache/${nwjs_armv7_version}-normal/linux32'
+[ 
+	{
+		"type": "archive",
+		"only-arches": ["i386"],
+		"url": "${nwjs_i386_url}",
+		"sha256": "${nwjs_i386_sha256sum}",
+		"dest": "betaflight-configurator/cache/${nwjs_i386_version}-normal/linux32"
+	},
+	{
+		"type": "archive",
+		"only-arches": ["x86_64"],
+		"url": "${nwjs_amd64_url}",
+		"sha256": "${nwjs_amd64_sha256sum}",
+		"dest": "betaflight-configurator/cache/${nwjs_amd64_version}-normal/linux64"
+	},
+	{
+		"type": "archive",
+		"only-arches": ["arm"],
+		"url": "${nwjs_armv7_url}",
+		"sha256": "${nwjs_armv7_sha256sum}",
+		"dest": "betaflight-configurator/cache/${nwjs_armv7_version}-normal/linux32"
+	}
+]
 EOF
 }
 
@@ -238,11 +251,16 @@ gen_appdata() {
   </categories>
 </component>
 EOF
+	echo
 	appdata_sha256sum="$(sha256sumof "${xml_appdata_file}")"
 	tee "${src_appdata}" <<EOF
-- type: 'file'
-  path: 'com.betaflight.Configurator.appdata.xml'
-  sha256: '${appdata_sha256sum}'
+[ 
+	{
+		"type": "file",
+		"path": "com.betaflight.Configurator.appdata.xml",
+		"sha256": "${appdata_sha256sum}"
+	}
+]
 EOF
 }
 
