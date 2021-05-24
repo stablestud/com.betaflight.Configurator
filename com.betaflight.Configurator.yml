@@ -42,7 +42,7 @@ modules:
           - 'cp --verbose --archive "${FLATPAK_BUILDER_BUILDDIR}/betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
       sources: &sources
           - 'src-btfl.yml'
-          - 'src-nodejspkgs.yml'
+          - 'src-nodejspkgs.json'
           - 'src-nwjs.yml'
     - name: 'app'
       only-arches:

@@ -1,6 +1,6 @@
-.PHONY: all build install run generate clean cleanall
+.PHONY: all build install run sources clean cleanall
 
-SOURCES=src-appdata.yml src-btfl.yml src-nwjs.yml src-yarn.yml src-nodejspkgs.yml
+SOURCES=src-appdata.yml src-btfl.yml src-nwjs.yml src-yarn.yml src-nodejspkgs.json
 APPDATA=com.betaflight.Configurator.appdata.xml
 
 all: install
@@ -15,6 +15,6 @@ clean:
 	rm --verbose --force $(SOURCES) $(APPDATA)
 cleanall: clean
 	rm --verbose --force --recursive build-dir .flatpak-builder
-generate: clean
+sources: clean
 	./generate-sources.sh
-$(SOURCES) $(APPDATA): generate
+$(SOURCES) $(APPDATA): sources

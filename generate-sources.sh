@@ -9,14 +9,14 @@ nwjs_i386_fallback_version="0.44.2"
 nwjs_amd64_fallback_version="${nwjs_i386_fallback_version}"
 nwjs_armv7_fallback_version="0.27.6"
 
-json2yaml="flatpak-builder-tools/flatpak-json2yaml.py"
 node_generator="flatpak-builder-tools/node/flatpak-node-generator.py"
+builder_tools="${node_generator}"
 
 xml_appdata_file="com.betaflight.Configurator.appdata.xml"
 
 src_btfl="src-btfl.yml"
 src_yarnpkg="src-yarnpkg.yml"
-src_nodejspkgs="src-nodejspkgs.yml"
+src_nodejspkgs="src-nodejspkgs.json"
 src_nwjs="src-nwjs.yml"
 src_appdata="src-appdata.yml"
 
@@ -46,7 +46,6 @@ check_deps() {
 
 check_submodule() {
 	unset error
-	builder_tools="${json2yaml} ${node_generator}"
 	for i in ${builder_tools}; do
 		if [ ! -f "${here}/submodules/${i}" ]; then
 			echo "Error: 'submodules/${i}' missing" 1>&2
@@ -98,8 +97,7 @@ EOF
 }
 
 gen_nodejs_src() {
-	"${here}/submodules/${node_generator}" -o "${tmp_path}/generated-sources.json" yarn "${tmp_path}/${btfl_dirname}/yarn.lock"
-	"${here}/submodules/${json2yaml}" -f -o "${here}/${src_nodejspkgs}" "${tmp_path}/generated-sources.json"
+	"${here}/submodules/${node_generator}" -o "${here}/${src_nodejspkgs}" yarn "${tmp_path}/${btfl_dirname}/yarn.lock"
 	cat "${here}/${src_nodejspkgs}"
 }
 
