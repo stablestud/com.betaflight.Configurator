@@ -1,5 +1,5 @@
 # com.betaflight.Configurator
-Flatpak build configurations for the Betaflight Configurator
+Flatpak build configurations for the [betaflight/betaflight-configurator: Cross platform configuration tool for the Betaflight firmware](https://github.com/betaflight/betaflight-configurator)
 
 ## Creating a update
 
