@@ -1,4 +1,5 @@
 #! /usr/bin/env sh
+# Script that updates the source files required by betaflgith to be downloaded for flatpaks offline build
 
 btfl_repo="https://github.com/betaflight/betaflight-configurator.git"
 btfl_version="10.7.0"
@@ -52,6 +53,7 @@ check_submodule() {
 
 	if [ -n "${error}" ]; then
 		echo "Did you initialize the git submodules?" 1>&2
+		echo "'git submodule init' 'git submodule update'" 1>&2
 		exit 1
 	fi
 }
@@ -206,7 +208,6 @@ cleanup() {
 }
 
 main() {
-	trap cleanup EXIT SIGTERM SIGINT
 	set -e
 	unset count
 	echo "[$(( ++count ))] Check for dependencies"
@@ -214,6 +215,7 @@ main() {
 	echo "[$(( ++count ))] Check for submodules"
 	check_submodule
 	echo "[$(( ++count ))] Clone ${btfl_gitfile} repository to tmp directory"
+	trap cleanup EXIT SIGTERM SIGINT
 	clone_repo
 	echo "[$(( ++count ))] Remove current sources"
 	remove_sources

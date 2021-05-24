@@ -40,8 +40,6 @@ modules:
           - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator install'
           - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
           - 'cp --verbose --archive "${FLATPAK_BUILDER_BUILDDIR}/betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
-          - 'mkdir --parent "${FLATPAK_DEST}/bin"'
-          - 'ln --symbolic "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator" "${FLATPAK_DEST}/bin/betaflight-configurator"'
       sources: &sources
           - 'src-btfl.yml'
           - 'src-nodejspkgs.yml'
@@ -64,6 +62,24 @@ modules:
               - 'ARCH=armv7'
       build-commands: *app_build
       sources: *sources
+    - name: 'exports'
+      buildsystem: 'simple'
+      build-commands:
+          - 'mkdir --parent "${FLATPAK_DEST}/bin"'
+          - 'ln --symbolic "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator" "${FLATPAK_DEST}/bin/betaflight-configurator"'
+          - 'mkdir --parent
+              "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps"
+              "${FLATPAK_DEST}/share/applications"
+              "${FLATPAK_DEST}/share/metainfo"'
+          - 'desktop-file-install --dir="${FLATPAK_DEST}/share/applications/" --set-icon="${FLATPAK_ID}" --set-key=Exec --set-value="betaflight-configurator" "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator.desktop"'
+          - 'desktop-file-validate "${FLATPAK_DEST}/share/applications/betaflight-configurator.desktop"'
+          - 'install "${FLATPAK_DEST}/betaflight-configurator/icon/bf_icon_128.png" "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/"'
+          - 'appstream-util validate-relax --nonet "${FLATPAK_ID}.appdata.xml"'
+          - 'install "${FLATPAK_ID}.appdata.xml" "${FLATPAK_DEST}/share/metainfo"'
+      sources:
+          - type: 'file'
+            path: 'com.betaflight.Configurator.appdata.xml'
+            sha256: 'dc312ee76498907c3d3ebf0c69105cd1846c814a2a62df28420d38494f1d97fd'
 finish-args:
     - '--share=ipc'
     - '--socket=x11'
@@ -73,3 +89,5 @@ finish-args:
     - '--device=all'
     - '--socket=system-bus'
     - '--allow=bluetooth'
+rename-desktop-file: 'betaflight-configurator.desktop'
+rename-icon: 'bf_icon_128'
