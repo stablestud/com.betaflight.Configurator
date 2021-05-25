@@ -3,18 +3,20 @@
 SOURCES=src-appdata.json src-btfl.json src-nwjs.json src-yarnpkg.json src-nodejspkgs.json
 APPDATA=com.betaflight.Configurator.appdata.xml
 
-all: install
+all: sources build finish install
 
-build: $(SOURCES)
-	flatpak-builder build-dir com.betaflight.Configurator.yml --force-clean
-install: $(SOURCES) $(APPDATA)
-	flatpak-builder build-dir com.betaflight.Configurator.yml --force-clean --user --install
+build:
+	flatpak-builder build-dir com.betaflight.Configurator.yml --force-clean --build-only
+finish:
+	flatpak-builder build-dir com.betaflight.Configurator.yml --export-only
+	flatpak-builder build-dir com.betaflight.Configurator.yml --finish-only
+install:
+	flatpak-builder build-dir com.betaflight.Configurator.yml --user --install
 run:
 	flatpak run --user com.betaflight.Configurator
 clean:
 	rm --verbose --force $(SOURCES) $(APPDATA)
-cleanall: clean
+cleanall: cleah
 	rm --verbose --force --recursive build-dir .flatpak-builder
 sources: clean
 	./generate-sources.sh
-$(SOURCES) $(APPDATA): sources
