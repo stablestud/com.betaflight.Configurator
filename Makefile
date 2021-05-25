@@ -15,7 +15,7 @@ install:
 run:
 	flatpak run --user com.betaflight.Configurator
 clean:
-	rm --verbose --force $(SOURCES) $(APPDATA)
+	rm --verbose --force --recursive $(SOURCES) $(APPDATA) build-dir
 cleanall: clean
 	rm --verbose --force --recursive build-dir .flatpak-builder
 sources: clean
