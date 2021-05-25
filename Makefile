@@ -16,7 +16,7 @@ run:
 	flatpak run --user com.betaflight.Configurator
 clean:
 	rm --verbose --force $(SOURCES) $(APPDATA)
-cleanall: cleah
+cleanall: clean
 	rm --verbose --force --recursive build-dir .flatpak-builder
 sources: clean
 	./generate-sources.sh
