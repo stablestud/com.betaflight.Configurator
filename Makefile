@@ -3,15 +3,12 @@
 SOURCES=src-appdata.json src-btfl.json src-nwjs.json src-yarnpkg.json src-nodejspkgs.json
 APPDATA=com.betaflight.Configurator.appdata.xml
 
-all: sources build finish install
+all: sources install
 
 build:
 	flatpak-builder build-dir com.betaflight.Configurator.yml --force-clean --build-only
-finish:
-	flatpak-builder build-dir com.betaflight.Configurator.yml --export-only
-	flatpak-builder build-dir com.betaflight.Configurator.yml --finish-only
 install:
-	flatpak-builder build-dir com.betaflight.Configurator.yml --user --install
+	flatpak-builder build-dir com.betaflight.Configurator.yml --user --force-clean --install
 run:
 	flatpak run --user com.betaflight.Configurator
 clean:
