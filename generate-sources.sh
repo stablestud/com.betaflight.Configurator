@@ -187,6 +187,7 @@ gen_nwjs_src() {
 	fi
 	nwjs_armv7_sha256sum="$(sha256sumof "${tmp_path}/${nwjs_armv7_file}")"
 
+	# Create download sources for NW.js, ARM built of it is community built so it requires special treatment/actions
 	tee "${src_nwjs}" <<EOF
 [ 
 	{
@@ -208,7 +209,12 @@ gen_nwjs_src() {
 		"only-arches": ["arm"],
 		"url": "${nwjs_armv7_url}",
 		"sha256": "${nwjs_armv7_sha256sum}",
-		"dest": "betaflight-configurator/cache/${nwjs_armv7_version}-normal/linux32"
+		"dest": "betaflight-configurator/cache/${nwjs_i386_version}-normal/linux32"
+	},
+	{
+		"type": "shell",
+		"only-arches": ["arm"],
+		"commands": ["touch betaflight-configurator/cache/_ARMv7_IS_CACHED"]
 	}
 ]
 EOF

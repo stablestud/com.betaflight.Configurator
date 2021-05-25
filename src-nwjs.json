@@ -18,6 +18,11 @@
 		"only-arches": ["arm"],
 		"url": "https://github.com/LeonardLaszlo/nw.js-armv7-binaries/releases/download/v0.27.6/nwjs-v0.27.6-linux-arm.tar.gz",
 		"sha256": "2a1713cb6916092e04c8a45eef1803b5823ae54bc8958b658de1b28b2f1464eb",
-		"dest": "betaflight-configurator/cache/0.27.6-normal/linux32"
+		"dest": "betaflight-configurator/cache/0.44.2-normal/linux32"
+	},
+	{
+		"type": "shell",
+		"only-arches": ["arm"],
+		"commands": ["touch betaflight-configurator/cache/_ARMv7_IS_CACHED"]
 	}
 ]
