@@ -37,8 +37,8 @@ modules:
           env:
               - 'ARCH=linux32'
       build-commands: &app_build
-          - 'YARN_YARN_OFFLINE_MIRROR="flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator install'
-          - 'YARN_YARN_OFFLINE_MIRROR="flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
+          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator install'
+          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
           - 'cp --verbose --archive "betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
           - 'cp --verbose --archive "betaflight-configurator/assets/linux/{*.desktop,icon}" "${FLATPAK_DEST}/betaflight-configurator"'
       sources: &sources
