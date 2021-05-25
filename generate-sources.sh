@@ -276,27 +276,36 @@ cleanup() {
 
 main() {
 	set -e
-	unset count
-	echo "[$(( ++count ))] Check for dependencies"
+	count="1"
+	echo "[${count}] Check for dependencies"
 	check_deps
-	echo "[$(( ++count ))] Check for submodules"
+	count="$(( count+1 ))"
+	echo "[${count}] Check for submodules"
 	check_submodule
-	echo "[$(( ++count ))] Clone ${btfl_gitfile} repository to tmp directory"
+	count="$(( count+1 ))"
+	echo "[${count}] Clone ${btfl_gitfile} repository to tmp directory"
 	trap cleanup EXIT TERM INT
 	clone_repo
-	echo "[$(( ++count ))] Remove current sources"
+	count="$(( count+1 ))"
+	echo "[${count}] Remove current sources"
 	remove_sources
-	echo "[$(( ++count ))] Generate ${btfl_dirname} sources (${src_btfl})"
+	count="$(( count+1 ))"
+	echo "[${count}] Generate ${btfl_dirname} sources (${src_btfl})"
 	gen_btfl_src
-	echo "[$(( ++count ))] Generate yarnpkg sources (${src_yarnpkg})"
+	count="$(( count+1 ))"
+	echo "[${count}] Generate yarnpkg sources (${src_yarnpkg})"
 	gen_yarnpkg_src
-	echo "[$(( ++count ))] Generate nodejs package sources (${src_nodejspkgs})"
+	count="$(( count+1 ))"
+	echo "[${count}] Generate nodejs package sources (${src_nodejspkgs})"
 	gen_nodejs_src
-	echo "[$(( ++count ))] Generate NW.js sources (${src_nwjs})"
+	count="$(( count+1 ))"
+	echo "[${count}] Generate NW.js sources (${src_nwjs})"
 	gen_nwjs_src
-	echo "[$(( ++count ))] Update XML Appdata ()"
+	count="$(( count+1 ))"
+	echo "[${count}] Update XML Appdata ()"
 	gen_appdata
-	echo "[$(( ++count ))] Cleanup garbage"
+	count="$(( count+1 ))"
+	echo "[${count}] Cleanup garbage"
 	cleanup
 }
 
