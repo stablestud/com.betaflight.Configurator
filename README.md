@@ -1,8 +1,6 @@
 # com.betaflight.Configurator
 Flatpak build configuration for the [betaflight/betaflight-configurator: Cross platform configuration tool for the Betaflight firmware](https://github.com/betaflight/betaflight-configurator)
 
-## Installing the Flatpak
-
 ## Creating an update
 
 When updating the flatpak to a new Betaflight Configurator release the following has to be done:
