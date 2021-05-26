@@ -1,6 +1,6 @@
 app-id:   'com.betaflight.Configurator'
 runtime:  'org.freedesktop.Platform'
-runtime-version: '19.08'
+runtime-version: '18.08'
 sdk: 'org.freedesktop.Sdk'
 sdk-extensions:
     - 'org.freedesktop.Sdk.Extension.node10'
