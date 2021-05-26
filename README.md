@@ -1,6 +1,19 @@
 # com.betaflight.Configurator
 Flatpak build configuration for the [betaflight/betaflight-configurator: Cross platform configuration tool for the Betaflight firmware](https://github.com/betaflight/betaflight-configurator)
 
+## Installing Betaflight Configurator
+
+### Prerequisites
+
+Even though the application runs in its own sandbox, some changes are still required on the host.
+1. Create `udev` rules
+2. Add yourself to a group capable of talking to serial ports
+
+Precise How-To steps can be found at [Installing Betaflight · betaflight/betaflight Wiki](https://github.com/betaflight/betaflight/wiki/Installing-Betaflight#platform-specific-linux)
+
+Note: the `i386` architecture is no longer supported from flathub, therefore we cannot create a flatpak for it.
+However `amd64` and `armv7` architectures  are fully supported.
+
 ## Creating an update
 
 When updating the flatpak to a new Betaflight Configurator release the following has to be done:
@@ -11,7 +24,7 @@ When updating the flatpak to a new Betaflight Configurator release the following
 
 ## Generated files
 
-The following files are auto generated and should not be changed by hand.    
+The following files are auto generated and should not be changed manually.    
 Instead run `generate-sources.sh` to generate the latest sources based on the selected Betaflight Configurator Version in `generate-sources.sh`
 
 - `src-appdata.json`
