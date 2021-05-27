@@ -2,23 +2,23 @@
 	{
 		"type": "archive",
 		"only-arches": ["i386"],
-		"url": "https://dl.nwjs.io/v0.44.2/nwjs-v0.44.2-linux-ia32.tar.gz",
-		"sha256": "cfa78268f8d6a07fb8582e3a0047b6d4bb57f9e72b5fc704fd70210270374658",
-		"dest": "betaflight-configurator/cache/0.44.2-normal/linux32"
+		"url": "https://dl.nwjs.io/v0.50.2/nwjs-v0.50.2-linux-ia32.tar.gz",
+		"sha256": "e2bfb290eb471e6e26c7dc0ff531d733adcb692acc485f8b05e9107292a801a5",
+		"dest": "betaflight-configurator/cache/0.50.2-normal/linux32"
 	},
 	{
 		"type": "archive",
 		"only-arches": ["x86_64"],
-		"url": "https://dl.nwjs.io/v0.44.2/nwjs-v0.44.2-linux-x64.tar.gz",
-		"sha256": "1d5c28cf15a776830b39a21000d5a827fe1a1b9d7676480efe76920b70423409",
-		"dest": "betaflight-configurator/cache/0.44.2-normal/linux64"
+		"url": "https://dl.nwjs.io/v0.50.2/nwjs-v0.50.2-linux-x64.tar.gz",
+		"sha256": "ca8c7e1e608577aa62f82c674411739f9dad3e3880df20570f9af2ee8ea136b6",
+		"dest": "betaflight-configurator/cache/0.50.2-normal/linux64"
 	},
 	{
 		"type": "archive",
 		"only-arches": ["arm"],
 		"url": "https://github.com/LeonardLaszlo/nw.js-armv7-binaries/releases/download/v0.27.6/nwjs-v0.27.6-linux-arm.tar.gz",
 		"sha256": "2a1713cb6916092e04c8a45eef1803b5823ae54bc8958b658de1b28b2f1464eb",
-		"dest": "betaflight-configurator/cache/0.44.2-normal/linux32"
+		"dest": "betaflight-configurator/cache/0.50.2-normal/linux32"
 	},
 	{
 		"type": "shell",

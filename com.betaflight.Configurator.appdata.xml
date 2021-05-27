@@ -26,7 +26,7 @@
     <screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
   </screenshots>
   <releases>
-    <release version="10.7.1" date="2020-10-13"/>
+    <release version="10.8.0" date="2021-05-20"/>
   </releases>
   <categories>
     <category>Utility</category>

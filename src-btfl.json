@@ -2,8 +2,8 @@
 	{
 		"type": "git",
 		"url": "https://github.com/betaflight/betaflight-configurator.git",
-		"branch": "10.7-maintenance",
-		"commit": "eac471deb3f43707d6052842c451b39e462ead62",
+		"branch": "master",
+		"commit": "f828cab249c7b2e855d20951b638be286ec436df",
 		"dest": "betaflight-configurator"
 	}
 ]

@@ -3,10 +3,10 @@
 
 btfl_repo="https://github.com/betaflight/betaflight-configurator.git"
 # Set the git branch to build, will use latest commit from branch
-btfl_branch="10.7-maintenance"
+btfl_branch="master"
 # Tag is used for version information and, if branch is unset, as version to build
 # Note: it's recommended to use branch builds rather than builds based on tags, as there are maintenance branches for specifc versions and often the tags are not updated to the latest commit.
-btfl_tag="10.7.1"
+btfl_tag="10.8.0"
 
 
 # Fallback version to use if version could not be extracted from sources
