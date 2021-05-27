@@ -2,10 +2,15 @@
 # Script that updates the source files required by betaflgith to be downloaded for flatpaks offline build
 
 btfl_repo="https://github.com/betaflight/betaflight-configurator.git"
-btfl_version="10.7.0"
+# Set the git branch to build, will use latest commit from branch
+btfl_branch="10.7-maintenance"
+# Tag is used for version information and, if branch is unset, as version to build
+# Note: it's recommended to use branch builds rather than builds based on tags, as there are maintenance branches for specifc versions and often the tags are not updated to the latest commit.
+btfl_tag="10.7.1"
+
 
 # Fallback version to use if version could not be extracted from sources
-nwjs_i386_fallback_version="0.44.2"
+nwjs_i386_fallback_version="0.44.2"	# x86 not supported by upstream anymore...
 nwjs_amd64_fallback_version="${nwjs_i386_fallback_version}"
 nwjs_armv7_fallback_version="0.27.6"
 
@@ -60,10 +65,23 @@ check_submodule() {
 	fi
 }
 
+setup_git_target() {
+	if [ -z "${btfl_branch}" ]; then
+		echo "Checking out to tag '${btfl_tag}"
+		btfl_target="${btfl_tag?unset}"
+		btfl_checkout="tags/${btfl_tag}"
+	else
+		echo "Checking out to branch '${btfl_branch}'"
+		btfl_target="${btfl_branch}"
+		btfl_checkout="${btfl_branch}"
+	fi
+}
+
 clone_repo() {
 	tmp_path="$(mktemp --directory)"
 	git -C "${tmp_path}" clone "${btfl_repo}" 
-	git -C "${tmp_path}/${btfl_dirname}" checkout "tags/${btfl_version}"
+	setup_git_target
+	git -C "${tmp_path}/${btfl_dirname}" checkout "${btfl_checkout}"
 	btfl_commit="$(git -C "${tmp_path}/${btfl_dirname}" log --max-count=1 --pretty="format:%H")"
 	btfl_date="$(git -C "${tmp_path}/${btfl_dirname}" log --max-count=1 --pretty="format:%ct")"
 }
@@ -73,17 +91,31 @@ remove_sources() {
 }
 
 gen_btfl_src() {
-	tee "${src_btfl}" <<EOF
+	if [ -z "${btfl_branch}" ]; then
+		tee "${src_btfl}" <<EOF
 [ 
 	{
 		"type": "git",
 		"url": "${btfl_repo}",
-		"tag": "${btfl_version}",
+		"tag": "${btfl_tag}",
 		"commit": "${btfl_commit}",
 		"dest": "${btfl_dirname}"
 	}
 ]
 EOF
+	else
+		tee "${src_btfl}" <<EOF
+[ 
+	{
+		"type": "git",
+		"url": "${btfl_repo}",
+		"branch": "${btfl_branch}",
+		"commit": "${btfl_commit}",
+		"dest": "${btfl_dirname}"
+	}
+]
+EOF
+	fi
 }
 
 gen_yarnpkg_src() {
@@ -250,7 +282,7 @@ gen_appdata() {
     <screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
   </screenshots>
   <releases>
-    <release version="${btfl_version}" date="$(date --date="@${btfl_date}" "+%Y-%m-%d")"/>
+    <release version="${btfl_tag}" date="$(date --date="@${btfl_date}" "+%Y-%m-%d")"/>
   </releases>
   <categories>
     <category>Utility</category>
