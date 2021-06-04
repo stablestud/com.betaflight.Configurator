@@ -1,8 +1,3 @@
-Note: this repo is archived due to the need for network access while building betaflight-configurator.    
-However for a (strange?) reason flathub does not allow building flatpaks with network access. And I cannot be bothered to create a workaround for a workaround.
-
-Aslong Flathub does not allow builds with network connection, I don't see any point wasting more time in creating workarounds for workarounds. :(
-
 # com.betaflight.Configurator
 Flatpak build configuration for the [betaflight/betaflight-configurator: Cross platform configuration tool for the Betaflight firmware](https://github.com/betaflight/betaflight-configurator)
 
@@ -34,7 +29,4 @@ Instead run `generate-sources.sh` to generate the latest sources based on the se
 
 - `src-appdata.json`
 - `src-btfl.json`
-- `src-nwjs.json`
-- `src-yarn.json`
-- `src-nodejspkgs.json`
 - `com.betaflight.Configurator.appdata.xml`

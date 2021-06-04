@@ -1,68 +1,15 @@
 app-id:   'com.betaflight.Configurator'
 runtime:  'org.freedesktop.Platform'
-runtime-version: '19.08'
+runtime-version: '20.08'
 sdk: 'org.freedesktop.Sdk'
-sdk-extensions:
-    - 'org.freedesktop.Sdk.Extension.node10'
 command: 'betaflight-configurator'
-build-options:
-    append-path: '/app/node/bin:/app/yarnpkg/bin'
-    env:
-      - 'NPM_CONFIG_NODEDIR=/app/node'
-separate-locales: false
 modules:
-    # Install Nodejs
-    - name: 'nodejs'
+    - name: 'app'
       buildsystem: 'simple'
       build-commands:
-          - '/usr/lib/sdk/node10/install-sdk.sh'
-          - 'node --version'
-      cleanup:
-          - '*'
-    # Install Yarn
-    - name: 'yarn'
-      buildsystem: 'simple'
-      build-commands:
-          - 'cp --archive --target-dir "${FLATPAK_DEST}" yarnpkg'
-          - 'yarn --offline --version'
+          - 'cp --verbose --archive "betaflight-configurator" "${FLATPAK_DEST}/betaflight-configurator"'
       sources:
-          - 'src-yarnpkg.json'
-      cleanup:
-          - '*'
-    - name: 'app'
-      only-arches:
-        - 'i386'
-      buildsystem: 'simple'
-      build-options:
-          env:
-              - 'ARCH=linux32'
-      build-commands: &app_build
-          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator install'
-          - 'YARN_YARN_OFFLINE_MIRROR="${FLATPAK_BUILDER_BUILDDIR}/flatpak-node/yarn-mirror" yarn --offline --non-interactive --cwd betaflight-configurator gulp apps --"${ARCH}"'
-          - 'cp --verbose --archive "betaflight-configurator/apps/betaflight-configurator/${ARCH}" "${FLATPAK_DEST}/betaflight-configurator"'
-          - 'cp --verbose --archive "betaflight-configurator/assets/linux/betaflight-configurator.desktop" "betaflight-configurator/assets/linux/icon/" "${FLATPAK_DEST}/betaflight-configurator"'
-      sources: &sources
           - 'src-btfl.json'
-          - 'src-nodejspkgs.json'
-          - 'src-nwjs.json'
-    - name: 'app'
-      only-arches:
-          - 'x86_64'
-      buildsystem: 'simple'
-      build-options:
-          env:
-              - 'ARCH=linux64'
-      build-commands: *app_build
-      sources: *sources
-    - name: 'app'
-      only-arches:
-          - 'arm'
-      buildsystem: 'simple'
-      build-options:
-          env:
-              - 'ARCH=armv7'
-      build-commands: *app_build
-      sources: *sources
     - name: 'exports'
       buildsystem: 'simple'
       build-commands:
@@ -79,14 +26,15 @@ modules:
           - 'install "${FLATPAK_ID}.appdata.xml" "${FLATPAK_DEST}/share/metainfo"'
       sources:
           - 'src-appdata.json'
+rename-desktop-file: 'betaflight-configurator.desktop'
+rename-icon: 'bf_icon_128'
 finish-args:
     - '--share=ipc'
-    - '--socket=x11'
+    - '--socket=fallback-x11'
+    - '--socket=wayland'
     - '--socket=pulseaudio'
     - '--share=network'
     - '--filesystem=home'
     - '--device=all'
     - '--socket=system-bus'
     - '--allow=bluetooth'
-rename-desktop-file: 'betaflight-configurator.desktop'
-rename-icon: 'bf_icon_128'

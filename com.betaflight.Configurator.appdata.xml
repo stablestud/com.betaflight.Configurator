@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.betaflight.Configurator.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0</project_license>
-  <name>Betaflight Configurator</name>
-  <summary>Crossplatform configuration tool for the Betaflight flight control system</summary>
-  <description>
-    <p>
-      Betaflight Configurator is a crossplatform configuration tool for the Betaflight flight control system.
-      It allows you to configure the Betaflight software running on any supported Betaflight target, as well
-      as updating the firmware.
-      Various types of aircraft are supported by the tool and by Betaflight, e.g. quadcopters, hexacopters, octocopters and fixed-wing aircraft.
-    </p>
-    <p>
-      This configurator is the only configurator with support for Betaflight specific features. It will likely require that you
-      run the latest firmware on the flight controller. If you are experiencing any problems please make sure you are running
-      the latest firmware version.
-    </p>
-  </description>
-  <content_rating type="oars-1.1" />
-  <url type="homepage">https://github.com/betaflight/betaflight/wiki</url>
-  <screenshots>
-    <screenshot type="default">https://people.gnome.org/~alexl/betaflight-screenshot-1.png</screenshot>
-    <screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-2.png</screenshot>
-    <screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
-  </screenshots>
-  <releases>
-    <release version="10.8.0" date="2021-05-20"/>
-  </releases>
-  <categories>
-    <category>Utility</category>
-  </categories>
+	<id>com.betaflight.Configurator.desktop</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0</project_license>
+	<name>Betaflight Configurator</name>
+	<summary>Crossplatform configuration tool for the Betaflight flight control system</summary>
+	<description>
+		<p>
+			Betaflight Configurator is a crossplatform configuration tool for the Betaflight flight control system.
+			It allows you to configure the Betaflight software running on any supported Betaflight target, as well
+			as updating the firmware.
+			Various types of aircraft are supported by the tool and by Betaflight, e.g. quadcopters, hexacopters, octocopters and fixed-wing aircraft.
+		</p>
+		<p>
+			This configurator is the only configurator with support for Betaflight specific features. It will likely require that you
+			run the latest firmware on the flight controller. If you are experiencing any problems please make sure you are running
+			the latest firmware version.
+		</p>
+	</description>
+	<content_rating type="oars-1.1" />
+	<url type="homepage">https://github.com/betaflight/betaflight/wiki</url>
+	<screenshots>
+		<screenshot type="default">https://people.gnome.org/~alexl/betaflight-screenshot-1.png</screenshot>
+		<screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-2.png</screenshot>
+		<screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
+	</screenshots>
+	<releases>
+		<release version="" date=""/>
+	</releases>
+	<categories>
+		<category>Utility</category>
+	</categories>
 </component>
