@@ -3,6 +3,9 @@ runtime:  'org.freedesktop.Platform'
 runtime-version: '20.08'
 sdk: 'org.freedesktop.Sdk'
 command: 'betaflight-configurator'
+rename-desktop-file: 'betaflight-configurator.desktop'
+rename-icon: 'bf_icon_128'
+seperate-locales: false
 modules:
     - name: 'app'
       buildsystem: 'simple'
@@ -19,15 +22,13 @@ modules:
               "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps"
               "${FLATPAK_DEST}/share/applications"
               "${FLATPAK_DEST}/share/metainfo"'
-          - 'desktop-file-install --dir="${FLATPAK_DEST}/share/applications/" --set-icon="${FLATPAK_ID}" --set-key=Exec --set-value="betaflight-configurator" "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator.desktop"'
+          - 'desktop-file-install --dir="${FLATPAK_DEST}/share/applications/" --set-icon="${FLATPAK_ID}" --set-key=Exec --set-value="betaflight-configurator %U" "${FLATPAK_DEST}/betaflight-configurator/betaflight-configurator.desktop"'
           - 'desktop-file-validate "${FLATPAK_DEST}/share/applications/betaflight-configurator.desktop"'
           - 'install "${FLATPAK_DEST}/betaflight-configurator/icon/bf_icon_128.png" "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/"'
           - 'appstream-util validate-relax --nonet "${FLATPAK_ID}.appdata.xml"'
           - 'install "${FLATPAK_ID}.appdata.xml" "${FLATPAK_DEST}/share/metainfo"'
       sources:
           - 'src-appdata.json'
-rename-desktop-file: 'betaflight-configurator.desktop'
-rename-icon: 'bf_icon_128'
 finish-args:
     - '--share=ipc'
     - '--socket=fallback-x11'

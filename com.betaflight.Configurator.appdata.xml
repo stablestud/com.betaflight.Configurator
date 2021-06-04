@@ -19,7 +19,10 @@
 		</p>
 	</description>
 	<content_rating type="oars-1.1" />
-	<url type="homepage">https://github.com/betaflight/betaflight/wiki</url>
+	<url type="homepage">https://github.com/betaflight/betaflight-configurator</url>
+	<url type="bugtracker">https://github.com/betaflight/betaflight-configurator/issues</url>
+	<url type="help">https://github.com/betaflight/betaflight/wiki/Installing-Betaflight#platform-specific-linux</url>
+	<url type="donation">https://patreon.com/betaflight/</url>
 	<screenshots>
 		<screenshot type="default">https://people.gnome.org/~alexl/betaflight-screenshot-1.png</screenshot>
 		<screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-2.png</screenshot>
