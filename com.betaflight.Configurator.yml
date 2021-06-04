@@ -5,7 +5,7 @@ sdk: 'org.freedesktop.Sdk'
 command: 'betaflight-configurator'
 rename-desktop-file: 'betaflight-configurator.desktop'
 rename-icon: 'bf_icon_128'
-seperate-locales: false
+separate-locales: false
 modules:
     - name: 'app'
       buildsystem: 'simple'
@@ -37,5 +37,3 @@ finish-args:
     - '--share=network'
     - '--filesystem=home'
     - '--device=all'
-    - '--socket=system-bus'
-    - '--allow=bluetooth'

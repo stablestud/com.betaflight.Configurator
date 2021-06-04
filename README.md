@@ -30,3 +30,11 @@ Instead run `generate-sources.sh` to generate the latest sources based on the se
 - `src-appdata.json`
 - `src-btfl.json`
 - `com.betaflight.Configurator.appdata.xml`
+
+### Errors in logs
+
+Following errors can be ignored as they do not affect the betaflight-configurator
+- `Failed to load module "canberra-gtk-module"`
+- `Failed to parse extension manifest.`
+- `Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory`
+- `InitializeSandbox() called with multiple threads in process gpu-process.`
