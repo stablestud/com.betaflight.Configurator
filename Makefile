@@ -1,6 +1,6 @@
 .PHONY: all build install run sources clean cleanall
 
-SOURCES=src-btfl.json src-appdata.json
+SOURCES=src-app.json src-appdata.json
 APPDATA=com.betaflight.Configurator.appdata.xml
 
 all: sources install
