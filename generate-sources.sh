@@ -126,7 +126,7 @@ main() {
 	echo "[${count}] Check for dependencies"
 	check_deps
 	count="$(( count+1 ))"
-	echo "[${count}] Creating tempory directory"
+	echo "[${count}] Creating temporary directory"
 	mktemp_path
 	trap cleanup EXIT TERM INT
 	count="$(( count+1 ))"
