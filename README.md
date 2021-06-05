@@ -28,7 +28,7 @@ The following files are auto generated and should not be changed manually.
 Instead run `generate-sources.sh` to generate the latest sources based on the selected Betaflight Configurator Version in `generate-sources.sh`
 
 - `src-appdata.json`
-- `src-btfl.json`
+- `src-app.json`
 - `com.betaflight.Configurator.appdata.xml`
 
 ### Errors in logs
