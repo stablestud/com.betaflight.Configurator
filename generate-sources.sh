@@ -109,7 +109,7 @@ EOF
 [ 
 	{
 		"type": "file",
-		"path": "com.betaflight.Configurator.appdata.xml",
+		"path": "${appdata_file}",
 		"sha256": "${appdata_sha256sum}"
 	}
 ]
