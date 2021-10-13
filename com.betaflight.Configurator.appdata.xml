@@ -29,7 +29,7 @@
 		<screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
 	</screenshots>
 	<releases>
-		<release version="" date=""/>
+		<release version="10.7.1" date="2021-10-13"/>
 	</releases>
 	<categories>
 		<category>Utility</category>

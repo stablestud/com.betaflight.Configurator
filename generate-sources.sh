@@ -1,19 +1,19 @@
 #! /usr/bin/env sh
 
-btfl_version="10.7.1"
-btfl_dl_file="betaflight-configurator_${btfl_version}_linux64.zip"
-btfl_dl_url="https://github.com/betaflight/betaflight-configurator/releases/download/${btfl_version}/${btfl_dl_file}"
+app_version="10.7.1"
+app_dl_file="betaflight-configurator_${app_version}_linux64.zip"
+app_dl_url="https://github.com/betaflight/betaflight-configurator/releases/download/${app_version}/${app_dl_file}"
 
-xml_appdata_file="com.betaflight.Configurator.appdata.xml"
+appdata_file="com.betaflight.Configurator.appdata.xml"
 
-src_btfl="src-btfl.json"
+src_app="src-app.json"
 src_appdata="src-appdata.json"
 
-generated_files="${src_btfl} ${src_appdata}" 
+generated_files="${src_app} ${src_appdata}" 
 
 check_deps() {
 	unset error
-	deps="mktemp sha256sum rm tee dirname cut grep"
+	deps="mktemp sha256sum rm tee cut grep"
 
 	for i in ${deps}; do
 		if ! command -v "${i}" 1>"/dev/null" 2>&1; then
@@ -36,15 +36,15 @@ remove_sources() {
 	rm --verbose --force ${generated_files}
 }
 
-gen_btfl_src() {
-	wget --directory-prefix "${tmp_path?unset}" "${btfl_dl_url}"
-	btfl_sha256sum="$(sha256sumof "${tmp_path}/${btfl_dl_file}")"
-	tee "${src_btfl}" <<EOF
+gen_app_src() {
+	wget --directory-prefix "${tmp_path?unset}" "${app_dl_url}"
+	app_sha256sum="$(sha256sumof "${tmp_path}/${app_dl_file}")"
+	tee "${src_app}" <<EOF
 [ 
 	{
 		"type": "archive",
-		"url": "${btfl_dl_url}",
-		"sha256": "${btfl_sha256sum}",
+		"url": "${app_dl_url}",
+		"sha256": "${app_sha256sum}",
 		"dest": "betaflight-configurator"
 	}
 ]
@@ -64,7 +64,7 @@ sha256sumfromfile() {
 }
 
 gen_appdata() {
-	tee "${xml_appdata_file}" <<EOF
+	tee "${appdata_file}" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<id>com.betaflight.Configurator.desktop</id>
@@ -96,7 +96,7 @@ gen_appdata() {
 		<screenshot>https://people.gnome.org/~alexl/betaflight-screenshot-3.png</screenshot>
 	</screenshots>
 	<releases>
-		<release version="${btfl_tag}" date="$(date --date="@${btfl_date}" "+%Y-%m-%d")"/>
+		<release version="${app_version}" date="$(date "+%Y-%m-%d")"/>
 	</releases>
 	<categories>
 		<category>Utility</category>
@@ -104,12 +104,12 @@ gen_appdata() {
 </component>
 EOF
 	echo
-	appdata_sha256sum="$(sha256sumof "${xml_appdata_file}")"
+	appdata_sha256sum="$(sha256sumof "${appdata_file}")"
 	tee "${src_appdata}" <<EOF
 [ 
 	{
 		"type": "file",
-		"path": "com.betaflight.Configurator.appdata.xml",
+		"path": "${appdata_file}",
 		"sha256": "${appdata_sha256sum}"
 	}
 ]
@@ -126,17 +126,17 @@ main() {
 	echo "[${count}] Check for dependencies"
 	check_deps
 	count="$(( count+1 ))"
-	echo "[${count}] Creating tempory directory"
+	echo "[${count}] Creating temporary directory"
 	mktemp_path
 	trap cleanup EXIT TERM INT
 	count="$(( count+1 ))"
 	echo "[${count}] Remove current sources"
 	remove_sources
 	count="$(( count+1 ))"
-	echo "[${count}] Generate ${btfl_dirname} sources (${src_btfl})"
-	gen_btfl_src
+	echo "[${count}] Generate Betaflight Configurator sources (${src_app})"
+	gen_app_src
 	count="$(( count+1 ))"
-	echo "[${count}] Update XML Appdata ${xml_appdata_file}"
+	echo "[${count}] Update XML Appdata ${appdata_file}"
 	gen_appdata
 	count="$(( count+1 ))"
 	echo "[${count}] Cleanup garbage"
