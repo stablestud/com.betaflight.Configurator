@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-btfl_version="10.7.0"
+btfl_version="10.7.1"
 btfl_dl_file="betaflight-configurator_${btfl_version}_linux64.zip"
 btfl_dl_url="https://github.com/betaflight/betaflight-configurator/releases/download/${btfl_version}/${btfl_dl_file}"
 
