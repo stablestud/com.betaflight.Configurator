@@ -9,7 +9,7 @@ appdata_file="com.betaflight.Configurator.appdata.xml"
 src_app="src-app.json"
 src_appdata="src-appdata.json"
 
-generated_files="${src_app} ${src_appdata}" 
+generated_files="${src_app} ${src_appdata}"
 
 check_deps() {
 	unset error
@@ -40,7 +40,7 @@ gen_app_src() {
 	wget --directory-prefix "${tmp_path?unset}" "${app_dl_url}"
 	app_sha256sum="$(sha256sumof "${tmp_path}/${app_dl_file}")"
 	tee "${src_app}" <<EOF
-[ 
+[
 	{
 		"type": "archive",
 		"url": "${app_dl_url}",
@@ -59,7 +59,7 @@ sha256sumof() {
 sha256sumfromfile() {
 	shafile="${1?unset}"
 	file="${2?unset}"
-	
+
 	echo "$(grep "${file}$" "${shafile}" || echo '')" | cut --fields=1 --only-delimited --delimiter=' '
 }
 
@@ -106,7 +106,7 @@ EOF
 	echo
 	appdata_sha256sum="$(sha256sumof "${appdata_file}")"
 	tee "${src_appdata}" <<EOF
-[ 
+[
 	{
 		"type": "file",
 		"path": "${appdata_file}",
