@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-app_version="10.7.1"
+app_version="10.7.2"
 app_dl_file="betaflight-configurator_${app_version}_linux64.zip"
 app_dl_url="https://github.com/betaflight/betaflight-configurator/releases/download/${app_version}/${app_dl_file}"
 
